@@ -9,24 +9,34 @@ knapsack_objects <-
 
 
 
-bf_ks_sol = function(x, W){
-  len_x = nrow(x)
-  best_value = 0
-  best_indexes = c()
-  for(cmb in 1:(2^len_x-1)){
-    curr_combination = intToBits(cmb)
-    tmp_indexes = which(curr_combination[1:len_x]==01)
-    tmp_weight = sum(x[tmp_indexes,]$w)
-    tmp_value = sum(x[tmp_indexes,]$v)
-    if(tmp_weight < W){
-      print(tmp_indexes)
-      if(tmp_value > best_value){
-        best_indexes = tmp_indexes
-        best_value = tmp_value
-      }
+bf_ks_sol <- function(x, W) {
+  
+  if(!is.data.frame(x) | ncol(x)!=2) stop("The input object is not of data.frame type.\n")
+  if(!(all(colnames(x)==c("v", "w")) | all(colnames(x)==c("w", "v"))))
+    stop("The data.frame should have the columns named 'v' and 'w'.")
+  if(!is.numeric(W) | length(W)!=1 | W<=0) stop("The total weight (W) should be a positive scalar")
+  
+  rownames(x) <- 1:nrow(x)
+  too_big <- which(x$w>W)
+  x <- x[-too_big,]
+  n <- nrow(x)
+  
+  best_val <- 0
+  best_ind <- 0
+  i <- 1
+  bits <- intToBits(i)
+  
+  while(bits[n+1]==0) {
+    ind <- which(bits==1)
+    if(sum(x$w[ind])<=W & sum(x$v[ind])>best_val) {
+      best_val <- sum(x$v[ind])
+      best_ind <- as.numeric(rownames(x)[ind])
     }
+    i <- i+1
+    bits <- intToBits(i)
   }
-  return(list(value=best_value, elements=best_indexes))
+  
+  return(list(value = best_val, elements = best_ind))
 }
 
 
