@@ -11,7 +11,7 @@ knapsack_objects <-
 
 bf_ks_sol = function(x, W){
   len_x = nrow(x)
-  best_value = Inf
+  best_value = 0
   best_indexes = c()
   for(cmb in 1:(2^len_x-1)){
     curr_combination = intToBits(cmb)
@@ -19,8 +19,8 @@ bf_ks_sol = function(x, W){
     tmp_weight = sum(x[tmp_indexes,]$w)
     tmp_value = sum(x[tmp_indexes,]$v)
     if(tmp_weight < W){
-      if(tmp_value < best_value){
-        print(tmp_indexes)
+      print(tmp_indexes)
+      if(tmp_value > best_value){
         best_indexes = tmp_indexes
         best_value = tmp_value
       }
