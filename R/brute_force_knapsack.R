@@ -13,6 +13,7 @@ knapsack_objects <-
 #' The function enumerates all different combinations by using a binary representation of the numbers
 #' 1 to 2n and include all elements of that is equal to 1 in the binary representation.
 #' @return maximum knapsack value and which elements (rows in the data.frame).
+#' @export
 brute_force_knapsack <- function(x, W) {
 
   if(!is.data.frame(x) | ncol(x)!=2) stop("The input object is not of data.frame type.\n")

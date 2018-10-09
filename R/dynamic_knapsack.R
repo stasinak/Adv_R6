@@ -4,7 +4,7 @@
 #' @param W The knapsack size.
 #' @description This function can solve the knapsack problem exact by iterating over all possible values of W.
 #' @return maximum knapsack value and which elements (rows in the data.frame).
-#'
+#' @export
 dynamic_knapsack <- function(x, W) {
 
   if(!is.data.frame(x) | ncol(x)!=2)
