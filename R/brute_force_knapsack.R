@@ -14,7 +14,7 @@ brute_force_knapsack <- function(x, W) {
 
   rownames(x) <- 1:nrow(x)
   # too_big <- which(x$w>W)
-  # x <- x[-too_big,]
+  #  x <- x[-too_big,]
   n <- nrow(x)
 
   best_val <- 0
