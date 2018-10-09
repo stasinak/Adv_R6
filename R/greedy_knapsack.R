@@ -17,7 +17,10 @@ greedy_knapsack<-function(x,W){
   total_value<-0
 
   while (my_weight < W) {
-    index <- which(heuristic == max(heuristic))
+    max_heuristic = max(heuristic)
+    # if(max_heuristic==0)
+    #   break
+    index <- which(heuristic == max_heuristic)
     if(x$w[index] <= W-my_weight){
       my_weight <- my_weight + x$w[index]
       indexes <- c(indexes,index)
@@ -32,3 +35,4 @@ greedy_knapsack<-function(x,W){
   return(list(value=total_value,elements=indexes))
 }
 greedy_knapsack(x = knapsack_objects[1:800,], W = 3500)
+greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)
