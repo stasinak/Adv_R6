@@ -1,13 +1,10 @@
+rm(list = ls())
 set.seed(42)
 n <- 2000
 knapsack_objects <-
   data.frame(
     w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000)
   )
-
-
-
-
 
 bf_ks_sol <- function(x, W) {
   
@@ -40,4 +37,4 @@ bf_ks_sol <- function(x, W) {
 }
 
 
-bf_ks_sol(knapsack_objects[1:8, ], 3500)
+bf_ks_sol(x = knapsack_objects[1:8, ], 3500)
