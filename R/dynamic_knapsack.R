@@ -13,23 +13,45 @@ dynamic_knapsack = function(x, W){
   if(!is.numeric(W) | length(W)!=1 | W<=0) stop("The total weight (W) should be a positive scalar")
   
   item_count = nrow(x)
-  ordered_x = x[order(x$w),]
+  x$order = 1:item_count
+  x = x[order(x$w),]
   table = matrix(c(rep(0,item_count*(W+1))), ncol=W+1)
   # set 1st row
-  table[1, ] = c(rep(0, ordered_x$w[1]), rep(ordered_x$v[1], ncol(table)-ordered_x$w[1]))
+  table[1, ] = c(rep(0, x$w[1]), rep(x$v[1], ncol(table)-x$w[1]))
   for(i in 2:nrow(table)){
     for(j in 2:ncol(table)){
       w_lim = j-1
-      if(w_lim < ordered_x$w[i])
+      if(w_lim < x$w[i])
         table[i,j] = table[i-1, j]
       else
-        table[i,j] = max(table[i-1, j], (ordered_x$v[i] + table[i-1, j-ordered_x$w[i]]))
+        table[i,j] = max(table[i-1, j], (x$v[i] + table[i-1, j-x$w[i]]))
     }
   }
-  return(table[item_count,W+1])
+  
+  # finding elements
+  i <- item_count
+  j <- W+1
+  ind <- c()
+  
+  while(j>1) {
+    if(i>1) {
+      if(table[i, j] == table[i-1, j]) 
+        i <- i-1
+      else {
+        ind <- c(ind, x$order[i])
+        j <- j - x$w[i]
+        i <- ifelse(i>1, i-1, i)
+      }
+    }
+    else {
+      ind <- c(ind, x$order[i])
+      j <- 1
+    }
+  }
+  return(list(value=table[item_count,W+1], elements=ind))
 }
 # x = data.frame(w=c(1,3,4,5), v=c(1,4,5,7))
 # dynamic_knapsack(x, 7)
-# x=knapsack_objects[1:8, ]
-# W = 3500
-# dynamic_knapsack(x, W)
+x=knapsack_objects[1:8, ]
+W = 3500
+dynamic_knapsack(x, W)
