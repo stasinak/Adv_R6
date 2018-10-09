@@ -5,6 +5,14 @@ knapsack_objects <-
     w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000)
   )
 
+#' Title greedy_knapsack
+#'
+#' @param x Data frame which consists the value and the weight for each object.
+#' @param W The knapsack size
+#' @description This function uses Greedy heuristic.
+#' It does not return an exact result but it will reduce the computational complexity.
+#' @return  the function returns the maximum knapsack value and which element of the data frame.
+#' @export
 greedy_knapsack<-function(x,W){
   if(!is.data.frame(x) | ncol(x)!=2) stop("The input object is not of data.frame type.\n")
   if(!(all(colnames(x)==c("v", "w")) | all(colnames(x)==c("w", "v"))))

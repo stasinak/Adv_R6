@@ -5,6 +5,14 @@ knapsack_objects <-
     w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000)
   )
 
+#' Title brute_force_knapsack
+#'
+#' @param x Data frame which consists the value and the weight for each object.
+#' @param W The knapsack size.
+#' @description this function is guaranteed to give a correct answer in all situations.
+#' The function enumerates all different combinations by using a binary representation of the numbers
+#' 1 to 2n and include all elements of that is equal to 1 in the binary representation.
+#' @return maximum knapsack value and which elements (rows in the data.frame).
 brute_force_knapsack <- function(x, W) {
 
   if(!is.data.frame(x) | ncol(x)!=2) stop("The input object is not of data.frame type.\n")
