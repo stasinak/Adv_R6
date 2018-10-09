@@ -1,5 +1,7 @@
 # Speed testing
 
+### BRUTE FORCE
+
 library(profvis)
 set.seed(42)
 n <- 2000
