@@ -16,10 +16,16 @@ knapsack_objects <-
 #' @export
 brute_force_knapsack <- function(x, W) {
 
-  if(!is.data.frame(x) | ncol(x)!=2) stop("The input object is not of data.frame type.\n")
+  if(!is.data.frame(x) | ncol(x)!=2) 
+    stop("The input object is not of data.frame type.\n")
   if(!(all(colnames(x)==c("v", "w")) | all(colnames(x)==c("w", "v"))))
     stop("The data.frame should have the columns named 'v' and 'w'.")
-  if(!is.numeric(W) | length(W)!=1 | W<=0) stop("The total weight (W) should be a positive scalar")
+  if(!is.numeric(x$v)) 
+    stop("Column of values (v) is not of the expected type (numeric).")
+  if(!is.numeric(x$w)) 
+    stop("Column of weights (w) is not of the expected type (numeric).")
+  if(!is.numeric(W) | length(W)!=1 | W<=0) 
+    stop("The total weight (W) should be a positive scalar.")
 
   rownames(x) <- 1:nrow(x)
   # too_big <- which(x$w>W)

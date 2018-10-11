@@ -1,16 +1,31 @@
-#' Title
+#' Dynamic Knapsack
 #'
-#' @param x Data frame which consists the value and the weight for each object.
-#' @param W The knapsack size.
+#' @param x Data frame that consists of two numeric columns (order is not relevant): 
+#' \itemize{
+#'   \item "v": values of the objects;
+#'   \item "w": weights of the objects.
+#' }
+#' @param W A numeric value, being the knapsack size.
 #' @description This function can solve the knapsack problem exact by iterating over all possible values of W.
-#' @return maximum knapsack value and which elements (rows in the data.frame).
+#' @return The functoin returns a list containing two named objects:
+#' \itemize{
+#'   \item "value": maximum knapsack value;
+#'   \item "elements": a vector containing the indexes of the objects (rows of data.frame) used to obtain the final result.
+#' }
 #' @export
 #' 
 dynamic_knapsack = function(x, W){
-  if(!is.data.frame(x) | ncol(x)!=2) stop("The input object is not of data.frame type.\n")
+  
+  if(!is.data.frame(x) | ncol(x)!=2) 
+    stop("The input object is not of data.frame type.\n")
   if(!(all(colnames(x)==c("v", "w")) | all(colnames(x)==c("w", "v"))))
     stop("The data.frame should have the columns named 'v' and 'w'.")
-  if(!is.numeric(W) | length(W)!=1 | W<=0) stop("The total weight (W) should be a positive scalar")
+  if(!is.numeric(x$v)) 
+    stop("Column of values (v) is not of the expected type (numeric).")
+  if(!is.numeric(x$w)) 
+    stop("Column of weights (w) is not of the expected type (numeric).")
+  if(!is.numeric(W) | length(W)!=1 | W<=0) 
+    stop("The total weight (W) should be a positive scalar.")
   
   item_count = nrow(x)
   x$order = 1:item_count

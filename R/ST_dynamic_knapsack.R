@@ -198,8 +198,3 @@ profvis({
   }
   return(list(value=table[item_count,W+1], elements=ind))
 })
-
-
-test <- matrix(NA, 3, 6)
-test[1:3, 1:2] <- matrix(c(0,3), 3, 2, byrow = T)
-test
