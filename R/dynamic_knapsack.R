@@ -39,20 +39,21 @@ dynamic_knapsack = function(x, W){
   # set 1st row
   table[1, ] = c(rep(0, x$w[1]), rep(x$v[1], ncol(table)-x$w[1]))
   j_prec <- 1
-  #print(c("i", "j", "j_prec", "n_row", "n_col"))
   
   for(i in 2:nrow(table)){
     
     j <- x$w[i]+1
     #print(c(i, j, j_prec, item_count-i+1, j-j_prec+1))
-    table[i:item_count, j_prec:(j-1)] <- 
-      matrix(table[i-1, j_prec:(j-1)], item_count-i+1, j-j_prec, byrow = T)
+    if(j_prec!=j) {
+      table[i:item_count, j_prec:(j-1)] <- 
+        matrix(table[i-1, j_prec:(j-1)], item_count-i+1, j-j_prec, byrow = T)
+    }
     
     while( j<=(W+1) ) {
       
-      if(j-1 <= s) {
+      if((j-1) <= s) {
         
-        if(j-1 < x$w[i]) 
+        if((j-1) < x$w[i]) 
           table[i,j] = table[i-1, j]
         else
           table[i,j] = max(table[i-1, j], (x$v[i] + table[i-1, j-x$w[i]]))
@@ -95,6 +96,8 @@ dynamic_knapsack = function(x, W){
 }
 # x = data.frame(w=c(1,3,4,5), v=c(1,4,5,7))
 # dynamic_knapsack(x, 7)
-x=knapsack_objects[1:8, ]
-W = 3500
-dynamic_knapsack(x, W)
+# x=knapsack_objects[1:500, ]
+# W = 3500
+# speed <- dynamic_knapsack(x, W)
+# original <- dynamic_knapsack_original(x, W)
+# while_k <- dynamic_knapsack_while(x, W)
