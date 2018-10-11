@@ -12,10 +12,14 @@ knapsack_objects <-
 #' @description this function is guaranteed to give a correct answer in all situations.
 #' The function enumerates all different combinations by using a binary representation of the numbers
 #' 1 to 2n and include all elements of that is equal to 1 in the binary representation.
-#' @return maximum knapsack value and which elements (rows in the data.frame).
+#' @return The functoin returns a list containing two named objects:
+#' \itemize{
+#'   \item "value": maximum knapsack value;
+#'   \item "elements": a vector containing the indexes of the objects (rows of data.frame) used to obtain the final result.
+#' }
 #' @export
 brute_force_knapsack <- function(x, W) {
-
+  
   if(!is.data.frame(x) | ncol(x)!=2) 
     stop("The input object is not of data.frame type.\n")
   if(!(all(colnames(x)==c("v", "w")) | all(colnames(x)==c("w", "v"))))
@@ -26,17 +30,17 @@ brute_force_knapsack <- function(x, W) {
     stop("Column of weights (w) is not of the expected type (numeric).")
   if(!is.numeric(W) | length(W)!=1 | W<=0) 
     stop("The total weight (W) should be a positive scalar.")
-
+  
   rownames(x) <- 1:nrow(x)
   # too_big <- which(x$w>W)
   #  x <- x[-too_big,]
   n <- nrow(x)
-
+  
   best_val <- 0
   best_ind <- 0
   i <- 1
   bits <- intToBits(i)
-
+  
   while(bits[n+1]==0) {
     ind <- which(bits==1)
     if(sum(x$w[ind])<=W & sum(x$v[ind])>best_val) {

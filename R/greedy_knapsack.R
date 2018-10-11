@@ -11,7 +11,11 @@ knapsack_objects <-
 #' @param W The knapsack size
 #' @description This function uses Greedy heuristic.
 #' It does not return an exact result but it will reduce the computational complexity.
-#' @return  the function returns the maximum knapsack value and which element of the data frame.
+#' @return The functoin returns a list containing two named objects:
+#' \itemize{
+#'   \item "value": maximum knapsack value;
+#'   \item "elements": a vector containing the indexes of the objects (rows of data.frame) used to obtain the final result.
+#' }
 #' @export
 greedy_knapsack<-function(x,W){
   
@@ -28,10 +32,10 @@ greedy_knapsack<-function(x,W){
   
   my_weight=0
   heuristic<-x$v/x$w
-
+  
   indexes<-c()
   total_value<-0
-
+  
   while (my_weight < W) {
     max_heuristic = max(heuristic)
     # if(max_heuristic==0)
