@@ -18,7 +18,8 @@ knapsack_objects <-
 #'   \item "elements": a vector containing the indexes of the objects (rows of data.frame) used to obtain the final result.
 #' }
 #' @export
-brute_force_knapsack <- function(x, W) {
+brute_force_knapsack <- function(x, W,...) {
+  
   
   if(!is.data.frame(x) | ncol(x)!=2) 
     stop("The input object is not of data.frame type.\n")
