@@ -37,5 +37,5 @@ test_that("Function return correct results.", {
   expect_true(all(round(dk$elements) %in% c(3, 8)))
 
   st <- system.time(dk <- dynamic_knapsack(x = knapsack_objects[1:16,], W = 2000))
-  expect_true(as.numeric(st)[2] > 0.00)
+  expect_true(as.numeric(st)[2] >= 0.00)
 })

@@ -94,9 +94,3 @@ dynamic_knapsack = function(x, W){
   }
   return(list(value=table[item_count,W+1], elements=ind))
 }
-
-x=knapsack_objects[1:20, ]
-W = 3500
-speed <- dynamic_knapsack(x, W)
-original <- dynamic_knapsack(x, W)
-while_k <- dynamic_knapsack_while(x, W)

@@ -31,12 +31,12 @@ found. This approach is of complexity O(2n) since all possible combinations 2n n
 
 ###To use the Bruce force algorith:
 ```{r}
-brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
-brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500)
+AdvR6::brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
+AdvR6::brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500)
 ```
 ###Question How much time does it takes to run the algorithm for n = 16 objects?
 ```{r}
-system.time(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
+system.time(AdvR6::brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
 ```
 
 
@@ -47,13 +47,13 @@ over all possible values of w.
 
 ###How to use dynamic approach:
 ```{r}
-dynamic_knapsack(x = knapsack_objects[1:8,], W = 3500)
-dynamic_knapsack(x = knapsack_objects[1:12,], W = 3500)
+AdvR6::dynamic_knapsack(x = knapsack_objects[1:8,], W = 3500)
+AdvR6::dynamic_knapsack(x = knapsack_objects[1:12,], W = 3500)
 ```
 
 ###Question How much time does it takes to run the algorithm for n = 500 objects?
 ```{r}
-system.time(dynamic_knapsack(x = knapsack_objects[1:500,], W = 3500))
+system.time(AdvR6::dynamic_knapsack(x = knapsack_objects[1:500,], W = 3500))
 ```
 
 ##The third algorithm is using Greedy heuristic:
@@ -63,8 +63,8 @@ part of the algorithm).
 
 ###How to use Greedy algorithm:
 ```{r}
-greedy_knapsack(x = knapsack_objects[1:800,], W = 3500)
-greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)
+AdvR6::greedy_knapsack(x = knapsack_objects[1:800,], W = 3500)
+AdvR6::greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)
 ```
 
 ###Question How much time does it takes to run the algorithm for n = 1000000 objects?
@@ -73,7 +73,7 @@ greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)
 set.seed(42)
 n <-1000000
 knapsack_objects <-data.frame(w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000))
-system.time(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 2000))
+system.time(AdvR6::greedy_knapsack(x = knapsack_objects[1:1000000,], W = 2000))
 ```
 
 
@@ -97,7 +97,7 @@ This algorithm stops when it find the correct solution. Despite the fact that th
 ```{r}
 
 
-brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
+AdvR6::brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 ```
 
 

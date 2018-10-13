@@ -2,17 +2,25 @@
 % Please edit documentation in R/dynamic_knapsack.R
 \name{dynamic_knapsack}
 \alias{dynamic_knapsack}
-\title{Title}
+\title{Dynamic Knapsack}
 \usage{
 dynamic_knapsack(x, W)
 }
 \arguments{
-\item{x}{Data frame which consists the value and the weight for each object.}
+\item{x}{Data frame that consists of two numeric columns (order is not relevant): 
+\itemize{
+  \item "v": values of the objects;
+  \item "w": weights of the objects.
+}}
 
-\item{W}{The knapsack size.}
+\item{W}{A numeric value, being the knapsack size.}
 }
 \value{
-maximum knapsack value and which elements (rows in the data.frame).
+The functoin returns a list containing two named objects:
+\itemize{
+  \item "value": maximum knapsack value;
+  \item "elements": a vector containing the indexes of the objects (rows of data.frame) used to obtain the final result.
+}
 }
 \description{
 This function can solve the knapsack problem exact by iterating over all possible values of W.

@@ -4,7 +4,7 @@
 \alias{brute_force_knapsack}
 \title{Title brute_force_knapsack}
 \usage{
-brute_force_knapsack(x, W)
+brute_force_knapsack(x, W, parallel = FALSE)
 }
 \arguments{
 \item{x}{Data frame which consists the value and the weight for each object.}
@@ -12,7 +12,11 @@ brute_force_knapsack(x, W)
 \item{W}{The knapsack size.}
 }
 \value{
-maximum knapsack value and which elements (rows in the data.frame).
+The functoin returns a list containing two named objects:
+\itemize{
+  \item "value": maximum knapsack value;
+  \item "elements": a vector containing the indexes of the objects (rows of data.frame) used to obtain the final result.
+}
 }
 \description{
 this function is guaranteed to give a correct answer in all situations.

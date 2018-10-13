@@ -12,7 +12,11 @@ greedy_knapsack(x, W)
 \item{W}{The knapsack size}
 }
 \value{
-the function returns the maximum knapsack value and which element of the data frame.
+The functoin returns a list containing two named objects:
+\itemize{
+  \item "value": maximum knapsack value;
+  \item "elements": a vector containing the indexes of the objects (rows of data.frame) used to obtain the final result.
+}
 }
 \description{
 This function uses Greedy heuristic.

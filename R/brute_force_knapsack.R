@@ -1,9 +1,9 @@
-set.seed(42)
-n <- 2000
-knapsack_objects <-
-  data.frame(
-    w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000)
-  )
+
+
+
+
+
+
 
 #' Title brute_force_knapsack
 #'
@@ -17,10 +17,10 @@ knapsack_objects <-
 #'   \item "value": maximum knapsack value;
 #'   \item "elements": a vector containing the indexes of the objects (rows of data.frame) used to obtain the final result.
 #' }
+#' @import parallel
+#' 
 #' @export
-brute_force_knapsack <- function(x, W,...) {
-  
-  
+brute_force_knapsack <- function(x, W , parallel=FALSE) {
   if(!is.data.frame(x) | ncol(x)!=2) 
     stop("The input object is not of data.frame type.\n")
   if(!(all(colnames(x)==c("v", "w")) | all(colnames(x)==c("w", "v"))))
@@ -31,32 +31,48 @@ brute_force_knapsack <- function(x, W,...) {
     stop("Column of weights (w) is not of the expected type (numeric).")
   if(!is.numeric(W) | length(W)!=1 | W<=0) 
     stop("The total weight (W) should be a positive scalar.")
-  
   rownames(x) <- 1:nrow(x)
-  # too_big <- which(x$w>W)
-  #  x <- x[-too_big,]
   n <- nrow(x)
-  
   best_val <- 0
   best_ind <- 0
-  i <- 1
-  bits <- intToBits(i)
-  
-  while(bits[n+1]==0) {
-    ind <- which(bits==1)
-    if(sum(x$w[ind])<=W & sum(x$v[ind])>best_val) {
-      best_val <- sum(x$v[ind])
-      best_ind <- as.numeric(rownames(x)[ind])
-    }
-    i <- i+1
+  if(parallel==FALSE){
+    
+    i <- 1
     bits <- intToBits(i)
+    
+    while(bits[n+1]==0) {
+      ind <- which(bits==1)
+      if(sum(x$w[ind])<=W & sum(x$v[ind])>best_val) {
+        best_val <- sum(x$v[ind])
+        best_ind <- as.numeric(rownames(x)[ind])
+      }
+      i <- i+1
+      bits <- intToBits(i)
+    }
+    return(list(value = best_val, elements = best_ind))
+  } else {
+    # Calculate the number of cores
+    no_cores <- parallel::detectCores()-1
+    
+    # Initiate cluster
+    cl <- parallel::makeCluster(no_cores)
+    
+    parallel::clusterExport(cl,list("x","best_val","best_ind","W") , envir = environment())
+    
+    fun<-function(i){
+      ind <- which(intToBits(i) == 1)
+      if(sum(x$w[ind])<=W & sum(x$v[ind])>best_val){
+        best_val <<- sum(x$v[ind])
+        best_ind <<- as.numeric(rownames(x)[ind])
+      } 
+      return(list(value = best_val, elements = best_ind))
+    }
+    res = parallel::parLapply(cl,1:(2^n-1),fun)
+    parallel::stopCluster(cl)
+    return(list(value = res[[2^n-1]]$value, elements = res[[2^n-1]]$elements))
   }
-
-  return(list(value = best_val, elements = best_ind))
+  
 }
 
 
-brute_force_knapsack(knapsack_objects[1:8, ], 3500)
-brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500)
-brute_force_knapsack(x = knapsack_objects[1:8,], W = 2000)
-brute_force_knapsack(x = knapsack_objects[1:12,], W = 2000)
+
