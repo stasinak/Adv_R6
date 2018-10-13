@@ -15,7 +15,7 @@ knapsack_objects <-
 x = knapsack_objects[1:12, ]
 W = 3500
 
-profvis({
+profvis::profvis({
   item_count = nrow(x)
   x$order = 1:item_count
   x = x[order(x$w),]
@@ -213,7 +213,7 @@ knapsack_objects <-
 x = knapsack_objects[1:200, ]
 W = 3500
 
-profvis({
+profvis::profvis({
   item_count = nrow(x)
   x$order = 1:item_count
   x = x[order(x$w),]

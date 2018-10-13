@@ -1,8 +1,6 @@
 # Speed testing
 
 ### BRUTE FORCE
-
-library(profvis)
 set.seed(42)
 n <- 2000
 knapsack_objects <-
@@ -13,7 +11,7 @@ x = knapsack_objects[1:12, ]
 W = 3500
 
 # Original
-profvis({
+profvis::profvis({
   rownames(x) <- 1:nrow(x)
   # too_big <- which(x$w>W)
   # if(length(too_big)!=0)
@@ -49,7 +47,7 @@ x = knapsack_objects[1:12, ]
 W = 3500
 
 # Pre-processing of the data
-profvis({
+profvis::profvis({
   rownames(x) <- 1:nrow(x)
   too_big <- which(x$w>W)
   if(length(too_big)!=0)

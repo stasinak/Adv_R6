@@ -11,7 +11,7 @@ knapsack_objects <-
 x = knapsack_objects
 W = 3500000
 
-profvis({
+profvis::profvis({
   my_weight=0
   heuristic<-x$v/x$w
   
@@ -51,7 +51,7 @@ knapsack_objects <-
 x = knapsack_objects
 W = 3500000
 
-profvis({
+profvis::profvis({
   my_weight=0
   heuristic<-x$v/x$w
   n <- nrow(x)
