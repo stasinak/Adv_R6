@@ -85,24 +85,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The only solution that is guaranteed to give a correct answer in all situations for the knapsack problem is using brute-force search, i.e. going through all possible alternatives and return the maximum value found. This approach is of complexity O(2n) since all possible combinations 2n needs to be evaluated.</p>
 <div id="to-use-the-bruce-force-algorith" class="section level3">
 <h3>To use the Bruce force algorith:</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,], <span class="dt">W =</span> <span class="dv">3500</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
+n &lt;-<span class="dv">1000000</span>
+knapsack_objects &lt;-<span class="kw">data.frame</span>(<span class="dt">w=</span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4000</span>, <span class="dt">size =</span> n, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">v=</span><span class="kw">runif</span>(<span class="dt">n =</span> n, <span class="dv">0</span>, <span class="dv">10000</span>))
+AdvR6<span class="op">::</span><span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,], <span class="dt">W =</span> <span class="dv">3500</span>)
 <span class="co">#&gt; $value</span>
-<span class="co">#&gt; [1] 16770.38</span>
+<span class="co">#&gt; [1] 12634.27</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $elements</span>
-<span class="co">#&gt; [1] 5 8</span>
-<span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>,], <span class="dt">W =</span> <span class="dv">3500</span>)
+<span class="co">#&gt; [1] 3 8</span>
+AdvR6<span class="op">::</span><span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>,], <span class="dt">W =</span> <span class="dv">3500</span>)
 <span class="co">#&gt; $value</span>
-<span class="co">#&gt; [1] 16770.38</span>
+<span class="co">#&gt; [1] 14075.98</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $elements</span>
-<span class="co">#&gt; [1] 5 8</span></code></pre></div>
+<span class="co">#&gt; [1]  3 11</span></code></pre></div>
 </div>
 <div id="question-how-much-time-does-it-takes-to-run-the-algorithm-for-n-16-objects" class="section level3">
 <h3>Question How much time does it takes to run the algorithm for n = 16 objects?</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">16</span>,], <span class="dt">W =</span> <span class="dv">3500</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(AdvR6<span class="op">::</span><span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">16</span>,], <span class="dt">W =</span> <span class="dv">3500</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;    1.70    0.00    1.75</span></code></pre></div>
+<span class="co">#&gt;    1.66    0.01    1.70</span></code></pre></div>
 </div>
 </div>
 <div id="the-second-algorithm-is-using-dynamic-programming" class="section level2">
@@ -110,24 +113,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>This algorithm can solve the knapsack problem exact by iterating over all possible values of w.</p>
 <div id="how-to-use-dynamic-approach" class="section level3">
 <h3>How to use dynamic approach:</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dynamic_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,], <span class="dt">W =</span> <span class="dv">3500</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">AdvR6<span class="op">::</span><span class="kw">dynamic_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,], <span class="dt">W =</span> <span class="dv">3500</span>)
 <span class="co">#&gt; $value</span>
-<span class="co">#&gt; [1] 16770.38</span>
+<span class="co">#&gt; [1] 12634.27</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $elements</span>
-<span class="co">#&gt; [1] 5 8</span>
-<span class="kw">dynamic_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>,], <span class="dt">W =</span> <span class="dv">3500</span>)
+<span class="co">#&gt; [1] 3 8</span>
+AdvR6<span class="op">::</span><span class="kw">dynamic_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>,], <span class="dt">W =</span> <span class="dv">3500</span>)
 <span class="co">#&gt; $value</span>
-<span class="co">#&gt; [1] 16770.38</span>
+<span class="co">#&gt; [1] 14075.98</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $elements</span>
-<span class="co">#&gt; [1] 5 8</span></code></pre></div>
+<span class="co">#&gt; [1] 11  3  8</span></code></pre></div>
 </div>
 <div id="question-how-much-time-does-it-takes-to-run-the-algorithm-for-n-500-objects" class="section level3">
 <h3>Question How much time does it takes to run the algorithm for n = 500 objects?</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw">dynamic_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">500</span>,], <span class="dt">W =</span> <span class="dv">3500</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(AdvR6<span class="op">::</span><span class="kw">dynamic_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">500</span>,], <span class="dt">W =</span> <span class="dv">3500</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   22.11    0.33   22.81</span></code></pre></div>
+<span class="co">#&gt;   21.61    0.19   22.08</span></code></pre></div>
 </div>
 </div>
 <div id="the-third-algorithm-is-using-greedy-heuristic" class="section level2">
@@ -135,30 +138,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>This algorithm will not give an exact result (but it can be shown that it will return at least 50% of the true maximum value), but it will reduce the computational complexity considerably (actually to O(n log n) due to the sorting part of the algorithm).</p>
 <div id="how-to-use-greedy-algorithm" class="section level3">
 <h3>How to use Greedy algorithm:</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">greedy_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">800</span>,], <span class="dt">W =</span> <span class="dv">3500</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">AdvR6<span class="op">::</span><span class="kw">greedy_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">800</span>,], <span class="dt">W =</span> <span class="dv">3500</span>)
 <span class="co">#&gt; $value</span>
-<span class="co">#&gt; [1] 192646.7</span>
+<span class="co">#&gt; [1] 211261.2</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $elements</span>
-<span class="co">#&gt;  [1]  92 574 472  80 110 537 332 117  37 776 577 288 234 255 500 794  55</span>
-<span class="co">#&gt; [18] 290 436 346 282 764 599 303 345 300 243  43 747  35  77 229 719 564</span>
-<span class="kw">greedy_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">1200</span>,], <span class="dt">W =</span> <span class="dv">2000</span>)
+<span class="co">#&gt;  [1]  92 574  80 110 332  37  77 537 117  35 472 436 776 577 234 794 401</span>
+<span class="co">#&gt; [18] 764 290 695 346 345 527  71 500 196 229 564 747 255 214 288 719 282</span>
+AdvR6<span class="op">::</span><span class="kw">greedy_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">1200</span>,], <span class="dt">W =</span> <span class="dv">2000</span>)
 <span class="co">#&gt; $value</span>
-<span class="co">#&gt; [1] 212336.6</span>
+<span class="co">#&gt; [1] 215618.3</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $elements</span>
-<span class="co">#&gt;  [1]   92  574  472   80  110  840  537 1000  332  117   37 1197 1152  947</span>
-<span class="co">#&gt; [15]  904  776  577  288 1147 1131  234  255 1006  833 1176 1092  873  828</span>
-<span class="co">#&gt; [29] 1059  500 1090  794 1033</span></code></pre></div>
+<span class="co">#&gt;  [1]   92  574   80  110  332   37   77 1000  828 1176  537  117   35  472</span>
+<span class="co">#&gt; [15]  840  436  776  577 1197 1086  873  904  234 1131 1006  794  401 1147</span>
+<span class="co">#&gt; [29]  764  833  290 1061 1050 1134 1152  695</span></code></pre></div>
 </div>
 <div id="question-how-much-time-does-it-takes-to-run-the-algorithm-for-n-1000000-objects" class="section level3">
 <h3>Question How much time does it takes to run the algorithm for n = 1000000 objects?</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
-n &lt;-<span class="dv">1000000</span>
-knapsack_objects &lt;-<span class="kw">data.frame</span>(<span class="dt">w=</span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4000</span>, <span class="dt">size =</span> n, <span class="dt">replace =</span> <span class="ot">TRUE</span>), <span class="dt">v=</span><span class="kw">runif</span>(<span class="dt">n =</span> n, <span class="dv">0</span>, <span class="dv">10000</span>))
-<span class="kw">system.time</span>(<span class="kw">greedy_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>,], <span class="dt">W =</span> <span class="dv">2000</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="kw">system.time</span>(AdvR6<span class="op">::</span><span class="kw">greedy_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>,], <span class="dt">W =</span> <span class="dv">2000</span>))
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;    0.41    0.04    0.44</span></code></pre></div>
+<span class="co">#&gt;    0.30    0.03    0.33</span></code></pre></div>
 </div>
 <div id="question-what-performance-gain-could-you-get-by-trying-to-improving-your-code" class="section level3">
 <h3>Question: What performance gain could you get by trying to improving your code?</h3>
@@ -180,7 +181,7 @@ knapsack_objects &lt;-<span class="kw">data.frame</span>(<span class="dt">w=</sp
 <h2>Finally,in brute force algorithm the user can use parallel programming just adding parallel=TRUE :</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 
-<span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,], <span class="dt">W =</span> <span class="dv">3500</span>)
+AdvR6<span class="op">::</span><span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,], <span class="dt">W =</span> <span class="dv">3500</span>)
 <span class="co">#&gt; $value</span>
 <span class="co">#&gt; [1] 12634.27</span>
 <span class="co">#&gt; </span>

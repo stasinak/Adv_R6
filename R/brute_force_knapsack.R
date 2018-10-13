@@ -8,7 +8,9 @@
 #' Title brute_force_knapsack
 #'
 #' @param x Data frame which consists the value and the weight for each object.
+#' @param parallel Gives the opportunity to use parallel programming,if parallel=TRUE.
 #' @param W The knapsack size.
+#'
 #' @description this function is guaranteed to give a correct answer in all situations.
 #' The function enumerates all different combinations by using a binary representation of the numbers
 #' 1 to 2n and include all elements of that is equal to 1 in the binary representation.

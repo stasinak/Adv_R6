@@ -10,6 +10,8 @@ brute_force_knapsack(x, W, parallel = FALSE)
 \item{x}{Data frame which consists the value and the weight for each object.}
 
 \item{W}{The knapsack size.}
+
+\item{parallel}{Gives the opportunity to use parallel programming,if parallel=TRUE.}
 }
 \value{
 The functoin returns a list containing two named objects:
