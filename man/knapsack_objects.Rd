@@ -4,7 +4,7 @@
 \name{knapsack_objects}
 \alias{knapsack_objects}
 \title{knapsack_objects}
-\format{An object of class \code{data.frame} with 400000 rows and 2 columns.}
+\format{An object of class \code{data.frame} with 1000000 rows and 2 columns.}
 \usage{
 knapsack_objects
 }
