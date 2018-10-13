@@ -97,27 +97,3 @@ This algorithm stops when it find the correct solution. Despite the fact that th
 
 AdvR6::brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

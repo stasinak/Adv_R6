@@ -16,6 +16,7 @@ x = knapsack_objects[1:12, ]
 W = 3500
 
 profvis::profvis({
+  title <- "DYNAMIC: original"
   item_count = nrow(x)
   x$order = 1:item_count
   x = x[order(x$w),]
@@ -71,6 +72,7 @@ x = knapsack_objects[1:12, ]
 W = 3500
 
 profvis({
+  title <- "DYNAMIC: filter too heavy observations"
   item_count = nrow(x)
   x$order = 1:item_count
   too_big <- which(x$w>W)
@@ -129,7 +131,7 @@ knapsack_objects <-
   data.frame(
     w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000)
   )
-x = knapsack_objects[1:200, ]
+x = knapsack_objects[1:12, ]
 W = 3500
 
 profvis({
@@ -145,6 +147,7 @@ profvis({
   # set 1st row
   table[1, ] = c(rep(0, x$w[1]), rep(x$v[1], (W+1)-x$w[1]))
   j_prec <- 1
+  title <- "DYNAMIC: vectorized version"
   
   for(i in 2:item_count){
     
@@ -210,7 +213,7 @@ knapsack_objects <-
   data.frame(
     w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000)
   )
-x = knapsack_objects[1:200, ]
+x = knapsack_objects[1:12, ]
 W = 3500
 
 profvis::profvis({
@@ -226,13 +229,12 @@ profvis::profvis({
   # set 1st row
   table[1, ] = c(rep(0, x$w[1]), rep(x$v[1], ncol(table)-x$w[1]))
   j_prec <- 1
-  #print(c("i", "j", "j_prec", "n_row", "n_col"))
   i <- 2
+  title <- "DYNAMIC: vectorized with while"
   
   while(i<=item_count) {
     
     j <- x$w[i]+1
-    #print(c(i, j, j_prec, item_count-i+1, j-j_prec+1))
     if(j_prec!=j) {
       table[i:item_count, j_prec:(j-1)] <- 
         matrix(table[i-1, j_prec:(j-1)], item_count-i+1, j-j_prec, byrow = T)
