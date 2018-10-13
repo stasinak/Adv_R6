@@ -27,6 +27,7 @@ dynamic_knapsack = function(x, W){
   if(!is.numeric(W) | length(W)!=1 | W<=0) 
     stop("The total weight (W) should be a positive scalar.")
   
+  
   item_count = nrow(x)
   x$order = 1:item_count
   x = x[order(x$w),]
@@ -37,13 +38,12 @@ dynamic_knapsack = function(x, W){
   s <- x$w[1]+x$w[2]
   table = matrix(0, item_count, W+1)
   # set 1st row
-  table[1, ] = c(rep(0, x$w[1]), rep(x$v[1], ncol(table)-x$w[1]))
+  table[1, ] = c(rep(0, x$w[1]), rep(x$v[1], (W+1)-x$w[1]))
   j_prec <- 1
   
-  for(i in 2:nrow(table)){
+  for(i in 2:item_count){
     
     j <- x$w[i]+1
-    print(c(i, j, j_prec, item_count-i+1, j-j_prec+1))
     if(j_prec!=j) {
       table[i:item_count, j_prec:(j-1)] <- 
         matrix(table[i-1, j_prec:(j-1)], item_count-i+1, j-j_prec, byrow = T)
