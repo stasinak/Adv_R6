@@ -12,7 +12,7 @@ knapsack_objects <-
   data.frame(
     w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000)
   )
-x = knapsack_objects[1:500, ]
+x = knapsack_objects[1:12, ]
 W = 3500
 
 profvis({
@@ -122,13 +122,14 @@ profvis({
 
 # Vectorized allocation of matrix
 
+
 set.seed(42)
 n <- 2000
 knapsack_objects <-
   data.frame(
     w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000)
   )
-x = knapsack_objects[1:500, ]
+x = knapsack_objects[1:200, ]
 W = 3500
 
 profvis({
@@ -142,14 +143,12 @@ profvis({
   s <- x$w[1]+x$w[2]
   table = matrix(0, item_count, W+1)
   # set 1st row
-  table[1, ] = c(rep(0, x$w[1]), rep(x$v[1], ncol(table)-x$w[1]))
+  table[1, ] = c(rep(0, x$w[1]), rep(x$v[1], (W+1)-x$w[1]))
   j_prec <- 1
-  #print(c("i", "j", "j_prec", "n_row", "n_col"))
   
-  for(i in 2:nrow(table)){
+  for(i in 2:item_count){
     
     j <- x$w[i]+1
-    #print(c(i, j, j_prec, item_count-i+1, j-j_prec+1))
     if(j_prec!=j) {
       table[i:item_count, j_prec:(j-1)] <- 
         matrix(table[i-1, j_prec:(j-1)], item_count-i+1, j-j_prec, byrow = T)
@@ -157,9 +156,9 @@ profvis({
     
     while( j<=(W+1) ) {
       
-      if(j-1 <= s) {
+      if((j-1) <= s) {
         
-        if(j-1 < x$w[i]) 
+        if((j-1) < x$w[i]) 
           table[i,j] = table[i-1, j]
         else
           table[i,j] = max(table[i-1, j], (x$v[i] + table[i-1, j-x$w[i]]))
@@ -198,7 +197,7 @@ profvis({
       j <- 1
     }
   }
-  return(list(value=table[item_count,W+1], elements=ind))
+  list(value=table[item_count,W+1], elements=ind)
 })
 
 ####################################################################################################
@@ -211,7 +210,7 @@ knapsack_objects <-
   data.frame(
     w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000)
   )
-x = knapsack_objects[1:12, ]
+x = knapsack_objects[1:200, ]
 W = 3500
 
 profvis({
@@ -241,10 +240,10 @@ profvis({
     
     while( j<=(W+1) ) {
       
-      if(j-1 <= s) {
+      if((j-1) <= s) {
         
         #print(paste("J-1 vale", j-1, "; i vale", i, "e x$w[i]", x$w[i]))
-        if(j-1 < x$w[i]) 
+        if((j-1) < x$w[i]) 
           table[i,j] = table[i-1, j]
         else
           table[i,j] = max(table[i-1, j], (x$v[i] + table[i-1, j-x$w[i]]))
@@ -288,3 +287,4 @@ profvis({
   }
   return(list(value=table[item_count,W+1], elements=ind))
 })
+
