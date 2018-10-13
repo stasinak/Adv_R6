@@ -12,10 +12,8 @@ W = 3500
 
 # Original
 profvis::profvis({
+  title <- "BRUTE FORCE: initial version" 
   rownames(x) <- 1:nrow(x)
-  # too_big <- which(x$w>W)
-  # if(length(too_big)!=0)
-  #   x <- x[-too_big,]
   n <- nrow(x)
   
   best_val <- 0
@@ -48,6 +46,7 @@ W = 3500
 
 # Pre-processing of the data
 profvis::profvis({
+  title <- "BRUTE FORCE: discard too heavy data" 
   rownames(x) <- 1:nrow(x)
   too_big <- which(x$w>W)
   if(length(too_big)!=0)

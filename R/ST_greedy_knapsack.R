@@ -17,6 +17,7 @@ profvis::profvis({
   
   indexes<-c()
   total_value<-0
+  title <- "GREEDY: original"
   
   while (my_weight < W) {
     max_heuristic = max(heuristic)
@@ -57,6 +58,7 @@ profvis::profvis({
   n <- nrow(x)
   x$id <- 1:n
   x <- x[order(heuristic, decreasing = T),]
+  title <- "GREEDY: order dataset"
   
   indexes<-c()
   total_value<-0
