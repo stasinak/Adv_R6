@@ -22,7 +22,7 @@ devtools::install_github("stasinak/Adv_R6")
 ```
 
 
-#The user can solve the Knapsack problem using 3 different approaches
+#The user can solve the Knapsack problem using 3 different approaches.The code which used above are already optimized!
 
 
 ##The first alogorith is the Bruce force search.
@@ -70,17 +70,28 @@ greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)
 ###Question How much time does it takes to run the algorithm for n = 1000000 objects?
 
 ```{r}
+set.seed(42)
+n <-1000000
+knapsack_objects <-data.frame(w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000))
 system.time(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 2000))
 ```
 
-#The package has also one different optimized version for every algorithm!
-```{r}
 
-```
+###Question: What performance gain could you get by trying to improving your code?
+####Brute force algorithm :
+In this algorithm we realized if we use while loops instead of for loops we can gain speed because creating list or vector in for loop takes time.
+For optimizing our algorithm, we eliminate the elements which its weight is greater than the knapsack size, as a result we can gain some performance in our loops. 
+We also create a parallelized version of this algorithm which divides the problem into iterations and we distributed these iterations to cores.
 
-###Question What performance gain could you get by trying to improving your code?
-```{r}
-```
+###Dynamic algorithm :
+
+In this algorithm we gain speed because we vectorize the problem instead of putting and checing the same values until the end of row one by one.
+
+###Greedy algorithm :
+
+This algorithm stops when it find the correct solution. Despite the fact that this algorithm is the fastest one we gained speed(again) because we sort the elements by heuristic instead of getting the max heuristic value in every iteration.
+
+
 
 ##Finally,in brute force algorithm the user can use parallel programming just adding parallel=TRUE :
 ```{r}
