@@ -89,6 +89,44 @@ In this algorithm we gain speed because we vectorize the problem instead of putt
 
 This algorithm stops when it find the correct solution. Despite the fact that this algorithm is the fastest one we gained speed(again) because we sort the elements by heuristic instead of getting the max heuristic value in every iteration.
 
+###Profiling: 
+####Brute force algorithm :
+**First Algorithm**  
+<img src="img/brute_force_original.png" />
+
+ANALYSIS FOR FIRST
+
+**Optimized Algorithm**  
+<img src="img/brute_force_filter_data.png" />
+
+ANALYSIS FOR FIRST
+
+###Dynamic algorithm :  
+**First Algorithm**  
+<img src="img/dynamic_original.png" />
+<img src="img/dynamic_filter_data.png" />
+
+ANALYSIS FOR FIRST
+
+**Optimized Algorithm**  
+<img src="img/dynamic_vectorized.png" />
+<img src="img/dynamic_vectorized_while.png" />
+
+
+ANALYSIS FOR FIRST
+
+###Greedy algorithm :  
+**First Algorithm**  
+<img src="img/greedy_original.png" />
+
+ANALYSIS FOR FIRST
+
+**Optimized Algorithm**  
+<img src="img/greedy_order_dataset.png" />
+
+ANALYSIS FOR FIRST
+
+
 
 
 ##Finally,in brute force algorithm the user can use parallel programming just adding parallel=TRUE :
