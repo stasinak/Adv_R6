@@ -31,9 +31,6 @@ found. This approach is of complexity O(2n) since all possible combinations 2n n
 
 ###To use the Bruce force algorith:
 ```{r}
-set.seed(42)
-n <-1000000
-knapsack_objects <-data.frame(w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000))
 AdvR6::brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 AdvR6::brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500)
 ```
