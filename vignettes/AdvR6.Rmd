@@ -1,0 +1,114 @@
+---
+title: "Knapsack Problem"
+author: "Group14"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+#To install the package
+```{r, eval=FALSE}
+devtools::install_github("stasinak/Adv_R6")
+```
+
+
+#The user can solve the Knapsack problem using 3 different approaches
+
+
+##The first alogorith is the Bruce force search.
+The only solution that is guaranteed to give a correct answer in all situations for the knapsack problem is using brute-force search, i.e. going through all possible alternatives and return the maximum value
+found. This approach is of complexity O(2n) since all possible combinations 2n needs to be evaluated.
+
+###To use the Bruce force algorith:
+```{r}
+brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
+brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500)
+```
+###Question How much time does it takes to run the algorithm for n = 16 objects?
+```{r}
+system.time(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
+```
+
+
+
+##The second algorithm is using dynamic programming
+This algorithm  can solve the knapsack problem exact by iterating
+over all possible values of w.
+
+###How to use dynamic approach:
+```{r}
+dynamic_knapsack(x = knapsack_objects[1:8,], W = 3500)
+dynamic_knapsack(x = knapsack_objects[1:12,], W = 3500)
+```
+
+###Question How much time does it takes to run the algorithm for n = 500 objects?
+```{r}
+system.time(dynamic_knapsack(x = knapsack_objects[1:500,], W = 3500))
+```
+
+##The third algorithm is using Greedy heuristic:
+This algorithm will not give an exact result (but it can be shown that it will return at least 50% of the true maximum value),
+but it will reduce the computational complexity considerably (actually to O(n log n) due to the sorting
+part of the algorithm).
+
+###How to use Greedy algorithm:
+```{r}
+greedy_knapsack(x = knapsack_objects[1:800,], W = 3500)
+greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)
+```
+
+###Question How much time does it takes to run the algorithm for n = 1000000 objects?
+
+```{r}
+system.time(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 2000))
+```
+
+#The package has also one different optimized version for every algorithm!
+```{r}
+
+```
+
+###Question What performance gain could you get by trying to improving your code?
+```{r}
+```
+
+##Finally,in brute force algorithm the user can use parallel programming just adding parallel=TRUE :
+```{r}
+
+
+brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
