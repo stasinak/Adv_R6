@@ -43,7 +43,7 @@ dynamic_knapsack = function(x, W){
   for(i in 2:nrow(table)){
     
     j <- x$w[i]+1
-    #print(c(i, j, j_prec, item_count-i+1, j-j_prec+1))
+    print(c(i, j, j_prec, item_count-i+1, j-j_prec+1))
     if(j_prec!=j) {
       table[i:item_count, j_prec:(j-1)] <- 
         matrix(table[i-1, j_prec:(j-1)], item_count-i+1, j-j_prec, byrow = T)
@@ -94,10 +94,9 @@ dynamic_knapsack = function(x, W){
   }
   return(list(value=table[item_count,W+1], elements=ind))
 }
-# x = data.frame(w=c(1,3,4,5), v=c(1,4,5,7))
-# dynamic_knapsack(x, 7)
-# x=knapsack_objects[1:500, ]
-# W = 3500
-# speed <- dynamic_knapsack(x, W)
-# original <- dynamic_knapsack_original(x, W)
-# while_k <- dynamic_knapsack_while(x, W)
+
+x=knapsack_objects[1:20, ]
+W = 3500
+speed <- dynamic_knapsack(x, W)
+original <- dynamic_knapsack(x, W)
+while_k <- dynamic_knapsack_while(x, W)
