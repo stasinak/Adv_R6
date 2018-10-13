@@ -22,7 +22,7 @@ devtools::install_github("stasinak/Adv_R6")
 ```
 
 
-#The user can solve the Knapsack problem using 3 different approaches.The code which used above are already optimized!
+###The user can solve the Knapsack problem using 3 different approaches.The code which used above are already optimized!
 
 
 ##The first alogorith is the Bruce force search.
@@ -31,6 +31,7 @@ found. This approach is of complexity O(2n) since all possible combinations 2n n
 
 ###To use the Bruce force algorith:
 ```{r}
+library(AdvR6)
 AdvR6::brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
 AdvR6::brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500)
 ```
@@ -89,39 +90,39 @@ In this algorithm we gain speed because we vectorize the problem instead of putt
 
 This algorithm stops when it find the correct solution. Despite the fact that this algorithm is the fastest one we gained speed(again) because we sort the elements by heuristic instead of getting the max heuristic value in every iteration.
 
-###Profiling: 
+###Profiling:
 ####Brute force algorithm :
-**First Algorithm**  
+**First Algorithm**
 <img src="img/brute_force_original.png" />
 
 ANALYSIS FOR FIRST
 
-**Optimized Algorithm**  
+**Optimized Algorithm**
 <img src="img/brute_force_filter_data.png" />
 
 ANALYSIS FOR FIRST
 
-###Dynamic algorithm :  
-**First Algorithm**  
+###Dynamic algorithm :
+**First Algorithm**
 <img src="img/dynamic_original.png" />
 <img src="img/dynamic_filter_data.png" />
 
 ANALYSIS FOR FIRST
 
-**Optimized Algorithm**  
+**Optimized Algorithm**
 <img src="img/dynamic_vectorized.png" />
 <img src="img/dynamic_vectorized_while.png" />
 
 
 ANALYSIS FOR FIRST
 
-###Greedy algorithm :  
-**First Algorithm**  
+###Greedy algorithm :
+**First Algorithm**
 <img src="img/greedy_original.png" />
 
 ANALYSIS FOR FIRST
 
-**Optimized Algorithm**  
+**Optimized Algorithm**
 <img src="img/greedy_order_dataset.png" />
 
 ANALYSIS FOR FIRST
